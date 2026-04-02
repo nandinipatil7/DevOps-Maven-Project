@@ -10,7 +10,7 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/AKC07-Dev/DevOps-Maven-Project.git'
+                git 'https://github.com/nandinipatil7/DevOps-Maven-Project.git'
             }
         }
 
