@@ -1,41 +1,42 @@
-pipeline {
-    agent any
+pipeline { 
+    agent any 
 
-    tools {
-        maven 'Maven3'
-        jdk 'JDK17'
-    }
+    tools { 
+        maven 'Maven'   
+        jdk 'JDK'       
+    } 
 
-    stages {
+    stages { 
 
-        stage('Checkout Code') {
-            steps {
-                git 'https://github.com/nandinipatil7/DevOps-Maven-Project.git'
-            }
-        }
+        stage('Checkout') { 
+            steps { 
+                checkout scm 
+            } 
+        } 
 
-        stage('Build') {
-            steps {
-                sh 'mvn clean compile'
-            }
-        }
+        stage('Build') { 
+            steps { 
+                script { 
+                    if (isUnix()) { 
+                        sh 'mvn clean compile' 
+                    } else { 
+                        bat 'mvn clean compile' 
+                    } 
+                } 
+            } 
+        } 
 
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-        }
-
-        stage('Package') {
-            steps {
-                sh 'mvn package'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application...'
-            }
-        }
-    }
+        stage('Test') { 
+            steps { 
+                script { 
+                    if (isUnix()) { 
+                        sh 'mvn test' 
+                    } else { 
+                        bat 'mvn test' 
+                    } 
+                } 
+            } 
+        } 
+    } 
 }
+      
